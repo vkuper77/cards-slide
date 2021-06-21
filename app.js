@@ -29,34 +29,38 @@ const dataSlides = [
 const conatiner = document.querySelector('.container')
 const body = document.querySelector('body')
 
-dataSlides.forEach((slide, index) => {
-  const div = document.createElement('div')
-  const title = document.createElement('h3')
-  conatiner.appendChild(div)
-  div.appendChild(title)
+function slidesPlugin(value) {
+  dataSlides.forEach((slide, index) => {
+    const div = document.createElement('div')
+    const title = document.createElement('h3')
+    conatiner.appendChild(div)
+    div.appendChild(title)
 
-  if (index === 0) {
-    div.classList.add('active')
-  }
+    if (index === value) {
+      div.classList.add('active')
+    }
 
-  div.classList.add('slide')
+    div.classList.add('slide')
 
-  div.style.backgroundImage = `url(${slide.src})`
-  title.textContent = `Japan ${slide.id}`
-})
-
-const slides = document.querySelectorAll('.slide')
-
-slides.forEach((slide, index) => {
-  slide.addEventListener('click', () => {
-    clearActiveClasses()
-    body.style.backgroundColor = `${dataSlides[index].bacground}`
-    slide.classList.add('active')
+    div.style.backgroundImage = `url(${slide.src})`
+    title.textContent = `Japan ${slide.id}`
   })
-})
+
+  const slides = document.querySelectorAll('.slide')
+
+  slides.forEach((slide, index) => {
+    slide.addEventListener('click', () => {
+      clearActiveClasses()
+      body.style.backgroundColor = `${dataSlides[index].bacground}`
+      slide.classList.add('active')
+    })
+  })
+}
 
 function clearActiveClasses() {
   slides.forEach((slide) => {
     slide.classList.remove('active')
   })
 }
+
+slidesPlugin(0)
